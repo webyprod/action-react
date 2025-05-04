@@ -4,11 +4,12 @@ jobs:
     test: 
         runs-on: ubuntu-latest
         steps:
-          - name: clone repo
-            run: |
-              echo "Cloning repo"
-              git clone https://github.com/${{github.repository}}.git myfiles
-              cd myfiles && ls
+          - name: get code
+            uses: actions/checkout@v4
+            # run: |
+            #  echo "Cloning repo"
+            #  git clone https://github.com/${{github.repository}}.git myfiles
+            #  cd myfiles && ls
           - name: setup node
             uses: actions/setup-node@v4
             with:
