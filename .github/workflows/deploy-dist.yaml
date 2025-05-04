@@ -6,10 +6,6 @@ jobs:
         steps:
           - name: get code
             uses: actions/checkout@v4
-            # run: |
-            #  echo "Cloning repo"
-            #  git clone https://github.com/${{github.repository}}.git myfiles
-            #  cd myfiles && ls
           - name: setup node
             uses: actions/setup-node@v4
             with:
@@ -22,3 +18,24 @@ jobs:
             run: npm run test
           - name: completed job
             run: echo "completed job"
+    build:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+          - name: get code
+            uses: actions/checkout@v4
+          - name: setup node
+            uses: actions/setup-node@v4
+            with:
+              node-version: 22
+          - name: install dependencies
+            run: npm install
+          - name: build project
+            run: npm run build
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+          - name: Deploy dist
+            run: echo "Deployment success"
+
