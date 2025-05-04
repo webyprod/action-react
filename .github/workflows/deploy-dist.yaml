@@ -9,3 +9,15 @@ jobs:
               echo "Cloning repo"
               git clone https://github.com/${{github.repository}}.git myfiles
               cd myfiles && ls
+          - name: setup node
+            uses: actions/setup-node@v4
+            with:
+              node-version: 22
+          - name: print node version
+            run: node -v
+          - name: install dependencies
+            run: npm install
+          - name: run tests
+            run: npm run test
+          - name: completed job
+            run: echo "completed job"
