@@ -1,12 +1,12 @@
 name: Deploy dist
-on:
+on: 
   push:
-  #  branches:
-  #    - master
-  #    - 'features/**'
-  #  paths-ignore:
-  #    - README.md
-  #    - '.github/workflows/*'
+    branches:
+      - master
+      - 'features/**'
+    paths-ignore:
+      - README.md
+      - '.github/workflows/*'
 jobs:
     test: 
         runs-on: ubuntu-latest
@@ -52,19 +52,23 @@ jobs:
           - name: build project
             run: npm run build
           - name: Upload dist artifact
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-pages-artifact@v3       # actions/upload-artifact@v4
             with:
-              name: dist-files
+              name: github-pages
               path: dist
     deploy:
         needs: build
         runs-on: ubuntu-latest
+        permissions:
+            pages: write
+            id-token: write
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
         steps:
-          - name: Download dist artifact
-            uses: actions/download-artifact@v4
+          - name: Download to github pages
+            id: deployment
+            uses: actions/deploy-pages@v4 #actions/download-artifact@v4
             with:
-              name: dist-files
-              path: dist
-          - name: Deploy dist
-            run: echo "Deployment success"
+              token: ${{ secrets.GITHUB_TOKEN }}
 
