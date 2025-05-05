@@ -6,7 +6,7 @@ on:
       - 'features/**'
     paths-ignore:
       - README.md
-      - '.github/workflows/*'
+      # - '.github/workflows/*'
 jobs:
     test: 
         runs-on: ubuntu-latest
