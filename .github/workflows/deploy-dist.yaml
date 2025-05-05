@@ -1,6 +1,5 @@
 name: Deploy dist
-on:
-  push:
+on: workflow_dispatch
   #  branches:
   #    - master
   #    - 'features/**'

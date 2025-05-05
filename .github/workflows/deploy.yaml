@@ -1,4 +1,4 @@
-name: Deploy dist
+name: Deploy github pages
 on: 
   push:
     branches:
@@ -72,3 +72,8 @@ jobs:
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
 
+# pour le deploiement sur github pages, recuperer les lignes 59 à 73 pour le job deploy
+# pour l'upload, utiliser l'action actions/upload-pages-artifact@v3 ; avec comme nom github-pages
+# ajouter dans package.json (tout en haut), "homepage":"https://webyprod.github.io/action-react",
+# ajouter dans vite.config.json (en bas) : base: '/action-react/
+# sur repository github, "settings" -> "pages" -> "source" = github actions
